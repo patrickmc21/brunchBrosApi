@@ -15,6 +15,8 @@ mockMaps.forEach(map => {
 
 mockUser.maps = mockMaps;
 
+const mockUsers = [mockUser, {email: 'matt@yo.com', username: 'sup', maps: []}]
+
 const createPost = (knex, post, pinID) => {
   return knex('posts').insert({
     title: post.title,
@@ -97,10 +99,9 @@ exports.seed = (knex, Promise) => {
       knex('users').del()
     })
     .then(() => {
-      const userPromises = [];
-      const users = [mockUser];
+      const userPromises = [];      
 
-      users.forEach((user) => {
+      mockUsers.forEach((user) => {
         userPromises.push(createUser(knex, user));
       });
       return Promise.all(userPromises);
