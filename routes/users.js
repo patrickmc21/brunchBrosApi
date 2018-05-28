@@ -8,10 +8,14 @@ routes.get('/', (req, res) => {
 
   db('users').select().where('email', email)
     .then((user) => {
-      res.status(200).json(user[0]);
+      if (user.length === 1) {
+        return res.status(200).json(user[0]);
+      } else {
+        return res.status(404).json({message: 'User not found'})
+      }
     })
     .catch(error => {
-      res.status(404).json({error, message: 'User not found'});
+      res.status(500).json({error, message: 'Unable to get user'});
     })
 });
 
@@ -38,7 +42,6 @@ routes.put('/:id', (req, res) => {
   
   db('users').where('UID', id).update({...user}, ['UID', 'username', 'email'])
     .then(editedUser => {
-      console.log(editedUser)
       if (editedUser.length === 1) {
         return res.status(200).json(editedUser[0]);
       } else {
@@ -56,7 +59,6 @@ routes.delete('/:id', (req, res) => {
 
   db('users').where('UID', id).del()
     .then((deleted) => {
-      console.log(deleted)
       if (deleted === 1) {
         return res.sendStatus(204);
       } else {

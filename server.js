@@ -11,3 +11,5 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/api/v1', routes);
 
 app.listen(app.get('port'));
+
+module.exports = { app };
