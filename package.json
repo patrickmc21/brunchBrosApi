@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon server.js",
     "test": "NODE_ENV=test mocha --exit",
     "lint": "./node_modules/eslint/bin/eslint.js --fix ./server.js ./routes.js ./routes/ ./db/ ./test/"
   },
