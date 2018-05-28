@@ -53,6 +53,6 @@ exports.down = function(knex, Promise) {
     knex.schema.dropTable('posts'),
     knex.schema.dropTable('pins'),
     knex.schema.dropTable('maps'),
-    knex.schema.dropTable('users')
+    knex.schema.dropTable('users')  
   ]);
 };
