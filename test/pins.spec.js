@@ -28,12 +28,9 @@ describe('pin endpoints', () => {
         response.should.have.status(200)
         response.should.be.json;
         response.body.should.be.an('array');
-        response.body[0].should.have.property('title');
-        response.body[0].title.should.equal('Santiagos')
-        response.body[0].should.have.property('long');
-        response.body[0].long.should.equal(-105.001)
-        response.body[0].should.have.property('lat');
-        response.body[0].lat.should.equal(39.7254)
+        response.body[0].should.have.property('title');        
+        response.body[0].should.have.property('long');        
+        response.body[0].should.have.property('lat');        
         response.body[0].should.have.property('mapID');
         response.body[0].mapID.should.equal(1)
         done();

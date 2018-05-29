@@ -29,13 +29,9 @@ describe('post endpoints', () => {
         response.should.be.json;
         response.body.should.be.an('array');
         response.body[0].should.have.property('title');
-        response.body[0].title.should.equal('Cheap and spicy');
         response.body[0].should.have.property('desc');
-        response.body[0].desc.should.equal('Hand-held burritos with a kick')
         response.body[0].should.have.property('likes');
-        response.body[0].likes.should.equal(69)
         response.body[0].should.have.property('thumbnail');
-        response.body[0].thumbnail.should.equal('https://igx.4sqi.net/img/general/200x200/2GC6GVab6CbJ9E2lHjEj-YLg9XEbO_0uddr6bpXhWiE.jpg')
         response.body[0].should.have.property('pinID');
         response.body[0].pinID.should.equal(1)
         done();
