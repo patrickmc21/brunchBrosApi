@@ -29,8 +29,7 @@ describe('pin endpoints', () => {
         response.should.be.json;
         response.body.should.be.an('array');
         response.body[0].should.have.property('title');        
-        response.body[0].should.have.property('long');        
-        response.body[0].should.have.property('lat');        
+        response.body[0].should.have.property('coordinates');        
         response.body[0].should.have.property('mapID');
         response.body[0].mapID.should.equal(1)
         done();
@@ -68,10 +67,9 @@ describe('pin endpoints', () => {
         response.body.title.should.equal('Garfs');
         response.body.should.have.property('mapID');
         response.body.mapID.should.equal(1);
-        response.body.should.have.property('lat');
-        response.body.lat.should.equal(50.1171);
-        response.body.should.have.property('long');
-        response.body.long.should.equal(-122.956);
+        response.body.should.have.property('coordinates');
+        response.body.coordinates[1].should.equal(50.1171);        
+        response.body.coordinates[0].should.equal(-122.956);
         response.body.should.have.property('pinID');
         response.body.pinID.should.equal(21);
         done();
@@ -109,10 +107,9 @@ describe('pin endpoints', () => {
         response.body.title.should.equal('Geillllo');
         response.body.should.have.property('mapID');
         response.body.mapID.should.equal(4);
-        response.body.should.have.property('lat');
-        response.body.lat.should.equal(60.5353);
-        response.body.should.have.property('long');
-        response.body.long.should.equal(7.98161);
+        response.body.should.have.property('coordinates');
+        response.body.coordinates[1].should.equal(60.5353);
+        response.body.coordinates[0].should.equal(7.98161);
         response.body.should.have.property('pinID');
         response.body.pinID.should.equal(19);
         done();
