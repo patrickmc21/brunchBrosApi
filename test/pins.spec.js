@@ -124,10 +124,24 @@ describe('pin endpoints', () => {
 
     it('should not patch a pin if a field is missing', (done) => {
       chai.request(app)
-      .post('/api/v1/pins/19')
+      .put('/api/v1/pins/19')
       .send({
         "mapID": 4,
         "coordinates": [60.535275, 7.981613]
+      })
+      .end((error, response) => {
+        response.should.have.status(406);
+        done();
+      })    
+    })
+
+    it('should not patch a pin if the pinID does not exist', (done) => {
+      chai.request(app)
+      .put('/api/v1/pins/5000')
+      .send({
+        "title": "Geillllo",
+        "mapID": 4,
+        "coordinates": [7.981613, 60.535275]
       })
       .end((error, response) => {
         response.should.have.status(404);
@@ -141,7 +155,7 @@ describe('pin endpoints', () => {
       chai.request(app)
       .delete('/api/v1/pins/1')
       .end((error, response) => {
-        // can't delete because key is foreign key
+        // can't delete because pin is foreign key to post
         // response.should.have.status(204)
         done();
       })
