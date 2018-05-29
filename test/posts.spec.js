@@ -33,7 +33,7 @@ describe('post endpoints', () => {
         response.body[0].should.have.property('likes');
         response.body[0].should.have.property('thumbnail');
         response.body[0].should.have.property('pinID');
-        response.body[0].pinID.should.equal(1)
+        response.body[0].pinID.should.equal(1);
         done();
       })
     })

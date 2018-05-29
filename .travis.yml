@@ -1,0 +1,12 @@
+language: node_js
+node_js: node
+services: postgresql
+before_script: psql -c 'create database brunchbrosdb_test;' -U postgres
+deploy:
+  provider: heroku
+  api_key:
+    secure: SGdy/DWo+LAKa1ZuIOJhVYF+PcGi+IVeEwG/G9IW+OCCFNPvYVCyh5ZhL0VBJMfDc5rxsLW+sVOK6BOtyCMI6WrIOR0cHTLL+1B6Lz7bxW/smHM5MsqnaW7Gf4LK10q2qNYG38m2f3DSTD6jOXcvhWZR4j8yJR+SAK2PlLmtWtYU8S4Wf+ToT+l5nYhFvCX/ry9/hYGCqp3yalB183ECWYeURFtPyl97U7fQ9Ku8QTbTdv3SuhJ/45bG1yyflfkSnTcMgvaISkOBTHNxGQwaYyCGuzuPH9Sy4L7ERZhucOAZbQYcRkzwYg6w8f43L7BHZNWJJEHxrLlKMzHzHO5V2eOT2m74Msf0rsv5tIZtQ8C3H198Csg4CpfBBmQbuaTEdCffFL0qVibS+VZtJxzBAz1k4GkXS2MJsriPD3l9SeqbB0xDnCWAQRKw7o1IfkZr1UAaNXX63GlhpFD3sDjgHQ9SASX0a80XmzgHsGKyBFWjF/hmvVgn3eAHnSijSAw8r5UsXyAkJDWAdviqN42lTpeeCZsTqFCDIDrKUOCB/uMU8o7RwMNV4xM+Fboaz2JTHxnajOHxkFQzOSr7h9kW8OrF+NoUYPvbaLHABceayXd4XmiLuBSolR0vpwe+ut4ZNh1Z2yHFDYQ0qyxhhXdLEWyTcXawRHvCCpm/Byj94vA=
+  app: brunchbrosdb
+  skip_cleanup: true
+notifications:
+  email: false
