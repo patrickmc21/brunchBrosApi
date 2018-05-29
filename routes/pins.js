@@ -21,8 +21,13 @@ routes.post('/', (req, res) => {
   const lat = {lat: req.body.coordinates[1]}
   const long = {long: req.body.coordinates[0]}
   const newPin = Object.assign(title, mapID, lat, long)
+  const pinKeys = Object.keys(newPin)
 
-  db('pins').insert(newPin, ['title', 'lat', 'long', 'pinID'])
+  if (!title || !mapID || !lat || !long) {
+    return res.status(406).json({message: 'Please include a valid pin'});
+  } 
+
+  db('pins').insert(newPin, ['pinID', ...pinKeys])
     .then((pin) => {
       return res.status(201).json(pin[0]);
     })
@@ -38,8 +43,13 @@ routes.put('/:id', (req, res) => {
   const lat = {lat: req.body.coordinates[1]}
   const long = {long: req.body.coordinates[0]}
   const updatedPin = Object.assign(title, mapID, lat, long)
+  const updatedPinKeys = Object.keys(updatedPin)
   
-  db('pins').where('pinID', id).update({...updatedPin}, ['title', 'lat', 'long', 'pinID'])
+  if (!id || !title || !mapID || !lat || !long) {
+    return res.status(406).json({message: 'Please include a valid pin'});
+  } 
+
+  db('pins').where('pinID', id).update({...updatedPin}, ['pinID', ...updatedPinKeys])
     .then(editedPin => {
       if (editedPin.length === 1) {
         return res.status(200).json(editedPin[0]);
