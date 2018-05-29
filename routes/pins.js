@@ -8,7 +8,11 @@ routes.get('/:mapId', (req, res) => {
 
   db('pins').select().where('mapID', mapId)
     .then((pin) => {
-      res.status(200).json(pin);
+      if (pin.length > 0) {
+        res.status(200).json(pin);  
+      } else {
+        res.status(404).json({error, message: 'No pins for that map'})
+      }
     })
     .catch(error => {
       res.status(404).json({error, message: 'No pins for that map'})
@@ -23,7 +27,7 @@ routes.post('/', (req, res) => {
   const newPin = Object.assign(title, mapID, lat, long)
   const pinKeys = Object.keys(newPin)
 
-  if (!title || !mapID || !lat || !long) {
+  if (!title.title || !mapID.mapID || !lat.lat || !long.long) {
     return res.status(406).json({message: 'Please include a valid pin'});
   } 
 
@@ -45,7 +49,7 @@ routes.put('/:id', (req, res) => {
   const updatedPin = Object.assign(title, mapID, lat, long)
   const updatedPinKeys = Object.keys(updatedPin)
   
-  if (!id || !title || !mapID || !lat || !long) {
+  if (!id || !title.title || !mapID.mapID || !lat.lat || !long.long) {
     return res.status(406).json({message: 'Please include a valid pin'});
   } 
 
@@ -63,7 +67,7 @@ routes.put('/:id', (req, res) => {
 });
 
 routes.delete('/:id', (req, res) => {
-  const { id } = req.params
+  const { id } = req.params;
 
   db('pins').where('pinID', id).del()
     .then((deletedPin) => {

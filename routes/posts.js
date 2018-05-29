@@ -7,8 +7,12 @@ routes.get('/:pinId', (req, res) => {
   const { pinId } = req.params
 
   db('posts').select().where('pinID', pinId)
-    .then((pin) => {
-      res.status(200).json(pin);
+    .then((post) => {
+      if (post.length > 0) {
+        res.status(200).json(post); 
+      } else {
+        res.status(404).json({error, message: 'No posts for that pin'})
+      } 
     })
     .catch(error => {
       res.status(404).json({error, message: 'No posts for that pin'})
@@ -17,7 +21,18 @@ routes.get('/:pinId', (req, res) => {
 
 routes.post('/', (req, res) => {
   const likes = { likes: 0 };
-  const newPost = {...req.body, ...likes};
+  const post = req.body
+  const {
+    title,
+    desc,
+    thumbnail,
+    pinID
+  } = post;
+  const newPost = {...post, ...likes};
+
+  if (!title || !desc || !thumbnail || !pinID) {
+    return res.status(406).json({message: 'Please include a valid post'});
+  } 
 
   db('posts').insert(newPost, ['ID', 'title', 'desc', 'likes', 'thumbnail'])
     .then((post) => {
@@ -31,6 +46,15 @@ routes.post('/', (req, res) => {
 routes.put('/:id', (req, res) => {
   const { id } = req.params;
   const updatedPost = req.body;
+  const {
+    title,
+    desc,
+    thumbnail
+  } = updatedPost
+
+  if (!title || !desc || !thumbnail) {
+    return res.status(406).json({message: 'Please include a valid post'});
+  }
 
   db('posts').where('ID', id).update({...updatedPost}, ['ID', 'title', 'desc', 'likes', 'thumbnail'])
     .then(editedPost => {
