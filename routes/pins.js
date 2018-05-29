@@ -42,14 +42,13 @@ routes.post('/', (req, res) => {
 
 routes.put('/:id', (req, res) => {
   const { id } = req.params
-  const title = {title: req.body.title}
-  const mapID = {mapID: req.body.mapID}
-  const lat = {lat: req.body.coordinates[1]}
-  const long = {long: req.body.coordinates[0]}
-  const updatedPin = Object.assign(title, mapID, lat, long)
+  const pin = req.body;
+  const lat = pin.coordinates[1]
+  const long = pin.coordinates[0]
+  const updatedPin = {title: pin.title, mapID: pin.mapID, lat, long }
   const updatedPinKeys = Object.keys(updatedPin)
   
-  if (!id || !title.title || !mapID.mapID || !lat.lat || !long.long) {
+  if (!id || !pin.title || !pin.mapID || !lat || !long) {
     return res.status(406).json({message: 'Please include a valid pin'});
   } 
 
