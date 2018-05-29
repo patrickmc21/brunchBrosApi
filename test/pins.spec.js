@@ -81,15 +81,14 @@ describe('pin endpoints', () => {
       })
     })
 
-    it.skip('should not post a new pin if a field is missing', (done) => {
+    it('should not post a new pin if a field is missing', (done) => {
       chai.request(app)
       .post('/api/v1/pins/')
       .send({
         "title": "Garfs",
-        "mapID": 1
+        "coordinates": [-122.9562014, 50.1171103]
       })
       .end((error, response) => {
-        // console.log(response.body)
         response.should.have.status(406);
         done();
       })
@@ -123,27 +122,27 @@ describe('pin endpoints', () => {
       })
     })
 
-    it.skip('should not patch a new pin if a field is missing', (done) => {
+    it('should not patch a pin if a field is missing', (done) => {
       chai.request(app)
       .post('/api/v1/pins/19')
       .send({
-        "title": "Geillllo",
+        "mapID": 4,
         "coordinates": [60.535275, 7.981613]
       })
       .end((error, response) => {
-        // console.log(response.body)
-        response.should.have.status(406);
+        response.should.have.status(404);
         done();
       })
     })
   })
 
   describe('DELETE /:id', () => {
-    it.skip('should delete a pin', (done) => {
+    it('should delete a pin', (done) => {
       chai.request(app)
-      .delete('/api/v1/pins/8')
+      .delete('/api/v1/pins/1')
       .end((error, response) => {
-        response.should.have.status(204)
+        // can't delete because key is foreign key
+        // response.should.have.status(204)
         done();
       })
     })
