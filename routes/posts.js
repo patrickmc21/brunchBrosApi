@@ -34,7 +34,7 @@ routes.post('/', (req, res) => {
     return res.status(406).json({message: 'Please include a valid post'});
   } 
 
-  db('posts').insert(newPost, ['ID', 'title', 'desc', 'likes', 'thumbnail'])
+  db('posts').insert(newPost, ['ID', 'title', 'desc', 'likes', 'thumbnail', 'pinID'])
     .then((post) => {
       return res.status(201).json(post[0])
     })
