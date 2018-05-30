@@ -7,7 +7,6 @@ app.set('port', process.env.PORT || 3001);
 app.use(bodyParser.json({ strict: false }));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-
 app.use('/api/v1', routes);
 
 app.listen(app.get('port'));
