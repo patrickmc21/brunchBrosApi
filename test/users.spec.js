@@ -33,7 +33,7 @@ describe('user endpoints', () => {
         response.body.should.have.property('username');
         response.body.username.should.equal('pmac89');
         response.body.should.have.property('UID');
-        response.body.UID.should.equal(1);
+        response.body.UID.should.equal(2);
         done();
       });
     });
@@ -94,10 +94,10 @@ describe('user endpoints', () => {
   describe('PUT /:id', () => {
     it('should edit an existing user', (done) => {
       chai.request(app)
-      .put('/api/v1/users/1')
+      .put('/api/v1/users/2')
       .send(
         {        
-          "UID": 1,
+          "UID": 2,
           "email": "pat@askjeeves.com",
           "username": "pmac8989"
         }
@@ -111,7 +111,7 @@ describe('user endpoints', () => {
         response.body.should.have.property('username');
         response.body.username.should.equal('pmac8989');
         response.body.should.have.property('UID');
-        response.body.UID.should.equal(1);
+        response.body.UID.should.equal(2);
         done();
       });
     });
@@ -140,7 +140,7 @@ describe('user endpoints', () => {
   describe('DELETE /:id', () => {
     it('should delete a user', (done) => {
       chai.request(app)
-      .delete('/api/v1/users/2')
+      .delete('/api/v1/users/1')
       .end((error, response) => {
         response.should.have.status(204);
         done();

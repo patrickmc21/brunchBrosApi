@@ -23,7 +23,7 @@ describe('pin endpoints', () => {
   describe('GET /:mapID', () => {
     it('should return a pin by map ID', (done) => {
       chai.request(app)
-      .get('/api/v1/pins/1')
+      .get('/api/v1/pins/2')
       .end((error, response) => {
         response.should.have.status(200)
         response.should.be.json;
@@ -31,7 +31,7 @@ describe('pin endpoints', () => {
         response.body[0].should.have.property('title');        
         response.body[0].should.have.property('coordinates');        
         response.body[0].should.have.property('mapID');
-        response.body[0].mapID.should.equal(1)
+        response.body[0].mapID.should.equal(2)
         done();
       })
     })
