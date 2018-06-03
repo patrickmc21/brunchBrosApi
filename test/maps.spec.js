@@ -23,7 +23,7 @@ describe('maps endpoints', () => {
   describe('GET /maps/:userID', () => {
     it('should return all maps for a given user', (done) => {
       chai.request(app)
-      .get('/api/v1/maps/1')
+      .get('/api/v1/maps/2')
       .end((error, response) => {
         response.should.have.status(200);
         response.should.be.json;
