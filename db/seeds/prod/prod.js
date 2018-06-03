@@ -15,6 +15,8 @@ mockMaps.forEach(map => {
 
 mockUser.maps = mockMaps;
 
+const mockUsers = [mockUser, {email: 'matt@yo.com', username: 'sup', maps: []}]
+
 const createPost = (knex, post, pinID) => {
   return knex('posts').insert({
     title: post.title,
