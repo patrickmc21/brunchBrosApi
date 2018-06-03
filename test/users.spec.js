@@ -11,13 +11,16 @@ chai.use(chaiHttp);
 describe('user endpoints', () => {
 
   beforeEach(() => {
-    return db.migrate.rollback()
+    db.migrate.rollback()
       .then(() => {
-        return db.migrate.latest()          
-      })
-      .then(() => {
-        return db.seed.run();    
-      })
+        db.migrate.latest()
+          .then(() => {
+            return db.seed.run()
+              .then(() => {
+                done();
+              });
+          });
+      });
   });
 
   describe('GET /:query', () => {
