@@ -4,6 +4,13 @@ const mockUser = {
 };
 
 const mockMaps = [
+  { 
+    title: "Bagel Joints",
+    location: "New York City",
+    description: "Best Bagels in Metropolis",
+    thumbnail: "FakeImage.jpg",
+    date: "5/22/2018"
+  },
   {    
     title: 'Breakfast Burritos',
     location: 'Denver, CO',
@@ -31,13 +38,6 @@ const mockMaps = [
     description: "Scando Land's best resorts",
     thumbnail: "https://www.skisafari.com/sites/ss/files/are-aerial-credit-johan-huczkowsky.jpg",
     date: "1/3/2013"    
-  },
-  {
-    title: "Bagel Joints",
-    location: "New York City",
-    description: "Best Bagels in Metropolis",
-    thumbnail: "FakeImage.jpg",
-    date: "5/22/2018"
   }
 ];
 

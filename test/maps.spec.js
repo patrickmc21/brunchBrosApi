@@ -29,15 +29,15 @@ describe('maps endpoints', () => {
         response.should.be.json;
         response.body.should.be.an('array');
         response.body[0].should.have.property('title');
-        response.body[0].title.should.equal('Breakfast Burritos');
+        response.body[0].title.should.equal('Bagel Joints');
         response.body[0].should.have.property('location');
-        response.body[0].location.should.equal('Denver, CO');
+        response.body[0].location.should.equal('New York City');
         response.body[0].should.have.property('description');
-        response.body[0].description.should.equal('Denver\'s zestiest breakfast burritos');
+        response.body[0].description.should.equal('Best Bagels in Metropolis');
         response.body[0].should.have.property('thumbnail');
-        response.body[0].thumbnail.should.equal('https://www.macheesmo.com/wp-content/uploads/2016/10/Rotisserie-Chicken-Breakfast-Burrito.jpg');
+        response.body[0].thumbnail.should.equal('FakeImage.jpg');
         response.body[0].should.have.property('date');
-        response.body[0].date.should.equal('2/4/2017');
+        response.body[0].date.should.equal('5/22/2018');
         response.body[0].should.have.property('mapID');
         response.body[0].mapID.should.equal(1);
         done();
@@ -174,7 +174,7 @@ describe('maps endpoints', () => {
   describe('DELETE /maps/:id', () => {
     it('should delete a map', (done) => {
       chai.request(app)
-      .delete('/api/v1/maps/5')
+      .delete('/api/v1/maps/1')
       .end((error, response) => {
         response.should.have.status(204);            
         done();
