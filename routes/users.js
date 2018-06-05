@@ -11,12 +11,12 @@ routes.get('/', (req, res) => {
       if (user.length === 1) {
         return res.status(200).json(user[0]);
       } else {
-        return res.status(404).json({message: 'User not found'})
+        return res.status(404).json({message: 'User not found'});
       }
     })
     .catch(error => {
       res.status(500).json({error, message: 'Unable to get user'});
-    })
+    });
 });
 
 routes.post('/', (req, res) => {
@@ -32,8 +32,13 @@ routes.post('/', (req, res) => {
       return res.status(201).json(user[0]);
     })
     .catch(error => {
-      return res.status(500).json({error, message: 'Server Error, failed to post user'});
-    })
+      return res.status(500).json(
+        {
+          error, 
+          message: 'Server Error, failed to post user'
+        }
+      );
+    });
 });
 
 routes.put('/:id', (req, res) => {
@@ -50,7 +55,7 @@ routes.put('/:id', (req, res) => {
     })
     .catch(error => {
       return res.status(500).json({error, message: 'Failed to update user'});
-    }) 
+    }); 
 
 });
 
@@ -67,7 +72,7 @@ routes.delete('/:id', (req, res) => {
     })
     .catch(error => {
       return res.status(500).json({error, message: 'Failed to delete'});
-    })
+    });
 });
 
 module.exports = routes;

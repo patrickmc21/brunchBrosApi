@@ -16,23 +16,7 @@ routes.get('/:userId', (req, res) => {
     }) 
     .catch(error => {
       return res.status(500).json({error, message: 'Failed to get maps'});
-    })
-});
-
-routes.get('/:mapID', (req, res) => {
-  const { mapID } = req.params;
-
-  db('maps').where('mapID', mapID).select()
-    .then((maps) => {
-      if (maps.length > 0) {
-        return res.status(200).json(maps[0]);
-      } else {
-        return res.status(404).json({message: 'Map not found'});
-      }
-    })
-    .catch(error => {
-      return res.status(500).json({message: 'Server Error, failed to get map'});
-    })
+    });
 });
 
 routes.post('/', (req, res) => {
@@ -53,11 +37,11 @@ routes.post('/', (req, res) => {
 
   db('maps').insert(map, ['mapID', ...mapKeys])
     .then(map => {
-      return res.status(201).json(map[0])
+      return res.status(201).json(map[0]);
     })
     .catch(error => {
       return res.status(500).json({error, message: 'Failed to add map'});
-    })
+    });
 });
 
 routes.put('/:id', (req, res) => {
@@ -75,7 +59,7 @@ routes.put('/:id', (req, res) => {
     })
     .catch(error => {
       return res.status(500).json({error, message: 'Failed to update map'});
-    })
+    });
 });
 
 routes.delete('/:id', (req, res) => {
@@ -91,7 +75,7 @@ routes.delete('/:id', (req, res) => {
     })
     .catch(error => {
       return res.status(500).json({error, message: 'Failed to delete map'});
-    })
+    });
 });
 
 module.exports = routes;
