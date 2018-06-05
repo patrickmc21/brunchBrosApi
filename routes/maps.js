@@ -19,6 +19,22 @@ routes.get('/:userId', (req, res) => {
     })
 });
 
+routes.get('/:mapID', (req, res) => {
+  const { mapID } = req.params;
+
+  db('maps').where('mapID', mapID).select()
+    .then((maps) => {
+      if (maps.length > 0) {
+        return res.status(200).json(maps[0]);
+      } else {
+        return res.status(404).json({message: 'Map not found'});
+      }
+    })
+    .catch(error => {
+      return res.status(500).json({message: 'Server Error, failed to get map'});
+    })
+});
+
 routes.post('/', (req, res) => {
   const map = req.body;
   const mapKeys = Object.keys(map);
