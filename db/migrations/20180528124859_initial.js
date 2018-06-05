@@ -17,7 +17,7 @@ exports.up = function(knex, Promise) {
       table.string('description');
       table.string('thumbnail');
       table.string('date');
-      table.integer('userID').unsigned()
+      table.integer('userID').unsigned();
       table.foreign('userID').references('users.UID');
 
       table.timestamps(true, true);
@@ -28,7 +28,7 @@ exports.up = function(knex, Promise) {
       table.string('title');
       table.float('long');
       table.float('lat');
-      table.integer('mapID').unsigned()
+      table.integer('mapID').unsigned();
       table.foreign('mapID').references('maps.mapID');
 
       table.timestamps(true, true);
@@ -40,12 +40,12 @@ exports.up = function(knex, Promise) {
       table.string('desc');
       table.integer('likes');
       table.string('thumbnail');
-      table.integer('pinID').unsigned()
+      table.integer('pinID').unsigned();
       table.foreign('pinID').references('pins.pinID');
 
       table.timestamps(true, true);
     })
-  ])
+  ]);
 };
 
 exports.down = function(knex, Promise) {

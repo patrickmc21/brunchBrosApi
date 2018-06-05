@@ -15,7 +15,7 @@ mockMaps.forEach(map => {
 
 mockUser.maps = mockMaps;
 
-const mockUsers = [{email: 'matt@yo.com', username: 'sup', maps: []}, mockUser]
+const mockUsers = [{email: 'matt@yo.com', username: 'sup', maps: []}, mockUser];
 
 const createPost = (knex, post, pinID) => {
   return knex('posts').insert({
@@ -24,7 +24,7 @@ const createPost = (knex, post, pinID) => {
     likes: post.likes,
     thumbnail: post.thumbnail,
     pinID: pinID[0]
-  })
+  });
 };
 
 const createPin = (knex, pin, mapID) => {
@@ -39,13 +39,13 @@ const createPin = (knex, pin, mapID) => {
 
       pin.posts.forEach(post => {
         postPromises.push(createPost(knex, post, pinID));
-      })
+      });
 
       return Promise.all(postPromises);
     })
     .catch(error => {
-      return error
-    })
+      return error;
+    });
 };
 
 const createMap = (knex, map, userID) => {
@@ -61,13 +61,13 @@ const createMap = (knex, map, userID) => {
       const pinPromises = [];
       
       map.pins.forEach((pin) => {
-        pinPromises.push(createPin(knex, pin, mapID))
+        pinPromises.push(createPin(knex, pin, mapID));
       });
       return Promise.all(pinPromises);
     })
     .catch(error => {
-      return error
-    })
+      return error;
+    });
 };
 
 const createUser = (knex, user) => {
@@ -78,25 +78,25 @@ const createUser = (knex, user) => {
     .then((userID) => {
       const mapPromises = [];
       user.maps.forEach(map => {
-        mapPromises.push(createMap(knex, map, userID))
+        mapPromises.push(createMap(knex, map, userID));
       });
       return Promise.all(mapPromises);
     })
     .catch(error => {
-      return error
-    })
+      return error;
+    });
 };
 
 exports.seed = (knex, Promise) => {
   return knex('posts').del()
     .then(() => {
-      knex('pins').del()      
+      knex('pins').del();      
     })
     .then(() => {
-      knex('maps').del()
+      knex('maps').del();
     })
     .then(() => {
-      knex('users').del()
+      knex('users').del();
     })
     .then(() => {
       const userPromises = [];      
