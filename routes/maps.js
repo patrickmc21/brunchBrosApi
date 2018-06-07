@@ -3,6 +3,16 @@ const environment = process.env.NODE_ENV || 'development';
 const configuration = require('../knexfile')[environment];
 const db = require('knex')(configuration);
 
+routes.get('/', (req, res) => {
+  db('maps').select()
+    .then((maps) => {
+      return res.status(200).json(maps)
+    })
+    .catch(error => {
+      return res.status(500).json({ error, message: 'Server error'})
+    });
+});
+
 routes.get('/:userId', (req, res) => {
   const { userId } = req.params;
 
