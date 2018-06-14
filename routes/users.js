@@ -27,7 +27,7 @@ routes.post('/', (req, res) => {
     return res.status(406).json({message: 'Must include valid user'});
   }
 
-  db('users').insert(user, ['UID', 'username', 'email'])
+  db('users').insert(user, ['UID', 'username', 'email', 'created_at'])
     .then((user) => {
       return res.status(201).json(user[0]);
     })
