@@ -4,13 +4,36 @@ const configuration = require('../knexfile')[environment];
 const db = require('knex')(configuration);
 
 routes.get('/', (req, res) => {
-  db('maps').select()
+  if (req.query.id) {    
+    db('maps').where('mapID', req.query.id).select()
     .then((maps) => {
-      return res.status(200).json(maps)
+      return res.status(200).json(maps[0])
     })
     .catch(error => {
       return res.status(500).json({ error, message: 'Server error'})
     });
+  } else if (req.query.uid) {
+    db('maps').select()
+      .then((maps) => {
+        const otherMaps = maps.filter(map => map.userID !== parseInt(req.query.uid));
+
+        otherMaps.sort((a, b) => {
+          return new Date(b.updated_at) - new Date(a.updated_at);
+        })    
+        return res.status(200).json(otherMaps.slice(0, 10))
+      })
+      .catch(error => {
+        return res.status(500).json({ error, message: 'Server error'})
+      });
+  } else {
+    db('maps').select()
+      .then((maps) => {
+        return res.status(200).json(maps)
+      })
+      .catch(error => {
+        return res.status(500).json({ error, message: 'Server error'})
+      });
+  }
 });
 
 routes.get('/:userId', (req, res) => {
